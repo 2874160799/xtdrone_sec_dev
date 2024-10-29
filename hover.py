@@ -1,5 +1,5 @@
 import rospy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist,PoseStamped
 import sys, select, os
 import tty, termios
 import time
@@ -11,18 +11,17 @@ upward = 0.4
 angular = 0.0
 arm_flag = False
 start_flag = True
+position = None
+time_flag = 1
+def pose_callback(msg):
+  position = msg.pose.position
+  rospy.loginfo(f"Position - x:{position.x},y:{position.y},z:{position.z}")
+  
+def pose_listener():
+  rospy.Subscriber('/iris_0/mavros/local_position/pose',PoseStamped,pose_callback)
+  rospy.spin()
 
-def getKey():
-  tty.setraw(sys.stdin.fileno())
-  rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
-  if rlist:
-    key = sys.stdin.read(1)
-  else:
-    key = ''
-  termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-  return key
 if __name__ == "__main__":
-  settings = termios.tcgetattr(sys.stdin)
   rospy.init_node('iris_0_hover',anonymous=True)
   cmd = String()
   twist = Twist()
@@ -31,8 +30,12 @@ if __name__ == "__main__":
   start_time = time.time()
 
   while not rospy.is_shutdown():
-    key = getKey()
-    #if key == 'b' or time.time() - start_time > 5:
+    #pose_listener()
+    while time_flag :
+      for i in range(3,0,-1):
+        print(f"The Drone will Arming after {i}s")
+        time.sleep(1)
+      time_flag = 0
     if start_flag == 1 and time.time() - start_time > 3:
       start_flag = 0
       cmd = 'OFFBOARD'
@@ -50,5 +53,3 @@ if __name__ == "__main__":
     multi_cmd_vel_flu_pub.publish(twist)
     multi_cmd_pub.publish(cmd)
     cmd = ''
-
-  termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
