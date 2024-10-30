@@ -61,8 +61,8 @@ class Communication:
     
     def start(self):
         while not rospy.is_shutdown():
-            self.publish_message_lyl(True)
             self.target_motion_pub.publish(self.target_motion)
+            self.publish_message_lyl(True)
             rate.sleep()
     #将话题中的位置信息提取到当前对象中
     def local_pose_callback(self,msg):
