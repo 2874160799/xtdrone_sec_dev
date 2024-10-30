@@ -423,7 +423,7 @@ class GazeboEnv:
         self.publisher3.publish(markerArray3)
 
     @staticmethod
-    def observe_collision(laser_data):
+    def observe_collision(laser_data):#检测激光传感器数据是否发生碰撞
         # Detect a collision from laser data
         min_laser = min(laser_data)
         if min_laser < COLLISION_DIST:
