@@ -56,7 +56,7 @@ class Communication:
         
         rcl_except = ParamValue(4,0.0)
         self.set_param_srv('COM_RCL_EXCEPT',rcl_except)
-        self.publish_message_lyl(True)
+        #self.publish_message_lyl(True)
         print("iris_0:communication initialized")
     
     def start(self):
@@ -223,4 +223,3 @@ class Communication:
 if __name__ == '__main__':
     communication = Communication()
     communication.start()
-    communication.publish_message_lyl(True)
