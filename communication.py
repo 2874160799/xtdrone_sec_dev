@@ -2,7 +2,7 @@ import rospy
 from mavros_msgs.msg import PositionTarget, ParamValue
 from mavros_msgs.srv import CommandBool, SetMode, ParamSet
 from geometry_msgs.msg import PoseStamped, Pose, Twist
-from std_msgs.msg import String
+from std_msgs.msg import String,Bool
 from pyquaternion import Quaternion
 import sys
 
@@ -46,6 +46,7 @@ class Communication:
         ros 
         '''
         self.target_motion_pub = rospy.Publisher("/iris_0/mavros/setpoint_raw/local",PositionTarget,queue_size=1)
+        self.communication_pub = rospy.Publisher("/iris_0/communication",Bool,queue_size=10)
         '''
         ros services
         '''
@@ -55,11 +56,12 @@ class Communication:
         
         rcl_except = ParamValue(4,0.0)
         self.set_param_srv('COM_RCL_EXCEPT',rcl_except)
-        
+        self.publish_message_lyl(True)
         print("iris_0:communication initialized")
     
     def start(self):
         while not rospy.is_shutdown():
+            self.publish_message_lyl(True)
             self.target_motion_pub.publish(self.target_motion)
             rate.sleep()
     #将话题中的位置信息提取到当前对象中
@@ -213,6 +215,12 @@ class Communication:
             print("iris_0:"+self.flight_mode+"failed")
             return False
 
+    def publish_message_lyl(self,value):
+        msg = Bool()
+        msg.data = value
+        self.communication_pub.publish(msg)
+        
 if __name__ == '__main__':
     communication = Communication()
     communication.start()
+    communication.publish_message_lyl(True)
