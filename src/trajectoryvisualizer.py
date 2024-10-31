@@ -2,7 +2,7 @@ import rospy
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Path
 
-class  TrajectoryVisualizer:
+class  GazeboEnv:
     def __init__(self):
         rospy.init_node('trajectory_visualizer',anonymous=True)
         
@@ -22,7 +22,8 @@ class  TrajectoryVisualizer:
     
     def run(self):
         rospy.spin()
+        
 
 if __name__=='__main__':
-    visualizer = TrajectoryVisualizer()
+    visualizer = GazeboEnv()
     visualizer.run()
