@@ -26,26 +26,7 @@ class  GazeboEnv:
     
     def run(self):
         rospy.spin()
-        
-    # def publish_point(self):
-    #     #markerArray = MarkerArray()
-    #     marker = Marker()
-    #     marker.header.frame_id = "map"
-    #     marker.header.stamp = rospy.Time.now()
-    #     marker.ns = "points"
-    #     marker.type = marker.POINTS
-    #     marker.action = marker.ADD
-    #     #设置点的大小
-    #     marker.scale.x = 0.1
-    #     marker.scale.y = 0.1
-    #     #设置点的颜色
-    #     marker.color.a = 1.0 #不透明
-    #     marker.color.r = 0.0
-    #     marker.color.g = 1.0
-    #     marker.color.b = 0.0
-    #     #设置点的位置
-    #     marker.points.append(Point(0,0,0))
-    #     self.point_pub.publish(marker)
+
     
     def publish_marker(self,event = None):
         markerArray = MarkerArray()
