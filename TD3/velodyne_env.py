@@ -132,7 +132,7 @@ class GazeboEnv:
 
     # Read velodyne pointcloud and turn it into distance data, then select the minimum value for each angle
     # range as state representation
-    def velodyne_callback(self, v):
+    def velodyne_callback(self, v):#阅读激光雷达数据用于处理后续决策
         data = list(pc2.read_points(v, skip_nans=False, field_names=("x", "y", "z")))
         self.velodyne_data = np.ones(self.environment_dim) * 10
         for i in range(len(data)):
