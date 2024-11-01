@@ -2,6 +2,8 @@ import rospy
 from geometry_msgs.msg import PoseStamped,Point
 from nav_msgs.msg import Path
 from visualization_msgs.msg import Marker,MarkerArray
+from std_srvs.srv import Empty
+import time
 
 class  GazeboEnv:
     def __init__(self):
@@ -16,14 +18,16 @@ class  GazeboEnv:
         
         self.publisher = rospy.Publisher('/iris_0/visualization_marker',MarkerArray,queue_size=1)
         #self.publish_marker()
-        self.timer = rospy.Timer(rospy.Duration(1.0), self.publish_marker)
+        #self.timer = rospy.Timer(rospy.Duration(1.0), self.publish_marker)
+        self.unpause = rospy.ServiceProxy("/gazebo/unpause_physics",Empty)
+        self.pause = rospy.ServiceProxy("gazebo/pause_physics",Empty)
     def pose_callback(self,data):
         pose_stamped = PoseStamped()
         pose_stamped.header = data.header  
         pose_stamped.pose = data.pose
         self.path_msg.poses.append(pose_stamped)
         self.path_pub.publish(self.path_msg)
-    
+
     def run(self):
         rospy.spin()
 
@@ -52,4 +56,14 @@ class  GazeboEnv:
 
 if __name__=='__main__':
     visualizer = GazeboEnv()
+    
+    for i in range(3,0,-1):
+        print(i)
+        time.sleep(1)
+    rospy.wait_for_service("/gazebo/pause_physics")
+    try:
+        visualizer.pause()
+    except (rospy.ServiceException) as e:
+        print("/gazebo/unpause_physics service call failed")
+    visualizer.pause()
     visualizer.run()
