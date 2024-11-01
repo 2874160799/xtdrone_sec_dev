@@ -49,13 +49,7 @@ class  GazeboEnv:
         
         markerArray.markers.append(marker)
         self.publisher.publish(markerArray)
-        
 
-        
-        
-        
-        
-        
 if __name__=='__main__':
     visualizer = GazeboEnv()
     visualizer.run()
