@@ -10,6 +10,8 @@ v1.2:新增start.py可以一键执行communication.py和hover.py，效果可以�
 
 v1.3:gazebo_env:新增暂停gazebo仿真,rviz可视化工具会显示在此
 
+v1.4: Add 2d_motion_planning
+
 TD3:神经网络文件夹
 # 步骤：
 启动PX4仿真
