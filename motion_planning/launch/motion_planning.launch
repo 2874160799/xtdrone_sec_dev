@@ -1,0 +1,20 @@
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="odom_to_map"
+    args="0.0 0.0 0 0.0 0.0 0.0 /odom /map 40" />
+
+    <arg name="motion_planning" default="/home/ubuntu/lyl/xtdrone_sec_dev/motion_planning/"/>
+    <arg name="move_forward_only" default="false"/>
+    <arg name="open_rviz" default="true"/>
+
+    <include file="$(arg motion_planning)/launch/move_base.launch">
+        <arg name="motion_planning" default="$(arg motion_planning)"/>
+        <arg name="move_forward_only" default="$(arg move_forward_only)"/>
+        <arg name="cmd_vel_topic" default="/lyl/iris_0/mavros/cmd_vel_flu"/>
+        <arg name="odom_topic" default="/iris_0/mavros/local_position/odom"/>
+    </include>
+
+    <group if="$(arg open_rviz)">
+        <node pkg="rviz" type="rviz" name="rviz" required="true"
+              args="-d $(arg motion_planning)/rviz/motion_planning.rviz"/>
+    </group>
+</launch>
