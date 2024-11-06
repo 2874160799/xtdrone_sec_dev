@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+# generated from catkin/python/catkin/environment_cache.py
+
+# based on a snapshot of the environment before and after calling the setup script
+# it emulates the modifications of the setup script without recurring computations
+
+# new environment variables
+
+# modified environment variables
+export CMAKE_PREFIX_PATH="/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/catkin_tools_prebuild:$CMAKE_PREFIX_PATH"
+export PWD='/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/catkin_tools_prebuild'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/catkin_tools_prebuild/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH='/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/catkin_tools_prebuild:/home/ubuntu/catkin_ws/src/A-LOAM:/home/ubuntu/catkin_ws/src/VINS-Fusion/camera_models:/home/ubuntu/catkin_ws/src/ego_planner/Utils/cmake_utils:/home/ubuntu/catkin_ws/src/cmdvel2gazebo:/home/ubuntu/catkin_ws/src/ego_planner/drone_detect:/home/ubuntu/catkin_ws/src/gazebo_ros_pkgs/gazebo_dev:/home/ubuntu/catkin_ws/src/gazebo_ros_pkgs/gazebo_msgs:/home/ubuntu/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros:/home/ubuntu/catkin_ws/src/gazebo_ros_pkgs/gazebo_plugins:/home/ubuntu/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros_control:/home/ubuntu/catkin_ws/src/gazebo_ros_pkgs/gazebo_ros_pkgs:/home/ubuntu/catkin_ws/src/VINS-Fusion/global_fusion:/home/ubuntu/catkin_ws/src/VINS-Fusion/loop_fusion:/home/ubuntu/catkin_ws/src/obstaclestopper:/home/ubuntu/catkin_ws/src/ego_planner/plan_env:/home/ubuntu/catkin_ws/src/ego_planner/path_searching:/home/ubuntu/catkin_ws/src/ego_planner/Utils/pose_utils:/home/ubuntu/catkin_ws/src/ego_planner/Utils/odom_visualization:/home/ubuntu/catkin_ws/src/ego_planner/Utils/quadrotor_msgs:/home/ubuntu/catkin_ws/src/ego_planner/Utils/multi_map_server:/home/ubuntu/catkin_ws/src/ego_planner/Utils/rviz_plugins:/home/ubuntu/catkin_ws/src/sicktoolbox:/home/ubuntu/catkin_ws/src/sicktoolbox_wrapper:/home/ubuntu/catkin_ws/src/catvehicle:/home/ubuntu/catkin_ws/src/stepvel:/home/ubuntu/catkin_ws/src/ego_planner/traj_utils:/home/ubuntu/catkin_ws/src/ego_planner/bspline_opt:/home/ubuntu/catkin_ws/src/ego_planner/plan_manage:/home/ubuntu/catkin_ws/src/ego_planner/rosmsg_tcp_bridge:/home/ubuntu/catkin_ws/src/ego_planner/Utils/uav_utils:/home/ubuntu/catkin_ws/src/velodyne_description:/home/ubuntu/catkin_ws/src/velodyne_gazebo_plugins:/home/ubuntu/catkin_ws/src/velodyne_simulator:/home/ubuntu/catkin_ws/src/VINS-Fusion/vins_estimator:/home/ubuntu/catkin_ws/src/waterplus_map_tools:/home/ubuntu/catkin_ws/src/ego_planner/Utils/waypoint_generator:/opt/ros/noetic/share'

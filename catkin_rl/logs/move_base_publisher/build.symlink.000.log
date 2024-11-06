@@ -1,0 +1,4 @@
+Symlinking /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/lib/pkgconfig/move_base_publisher.pc
+Symlinking /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/lib/move_base_publisher/send_goal
+Symlinking /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/share/move_base_publisher/cmake/move_base_publisherConfig.cmake
+Symlinking /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/share/move_base_publisher/cmake/move_base_publisherConfig-version.cmake

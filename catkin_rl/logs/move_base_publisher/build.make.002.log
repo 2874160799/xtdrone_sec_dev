@@ -1,0 +1,9 @@
+[35m[1mScanning dependencies of target send_goal[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/send_goal.dir/src/send_goal.cpp.o[0m
+[01m[K/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/send_goal.cpp:5:10:[m[K [01;31m[Kfatal error: [m[Ksend_goal.h: 没有那个文件或目录
+    5 | #include [01;31m[K<send_goal.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/send_goal.dir/build.make:63：CMakeFiles/send_goal.dir/src/send_goal.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:176：CMakeFiles/send_goal.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2

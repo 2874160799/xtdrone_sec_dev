@@ -4,9 +4,9 @@ from tf2_ros import TransformListener, Buffer
 import sys
 from sensor_msgs.msg import LaserScan
 
-vehicle_type = sys.argv[1]
-vehicle_id = sys.argv[2]
-laser_slam_type = sys.argv[3]
+vehicle_type = sys.argv[1]# iris
+vehicle_id = sys.argv[2]# 0
+laser_slam_type = sys.argv[3]# hector
 rospy.init_node(vehicle_type+vehicle_id+'_'+laser_slam_type+'_laser_transfer')
 pose_pub = rospy.Publisher(vehicle_type+'_'+ vehicle_id+"/mavros/vision_pose/pose", PoseStamped, queue_size=1)
 tfBuffer = Buffer()

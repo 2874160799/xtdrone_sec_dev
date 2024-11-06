@@ -1,0 +1,1 @@
+/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/share/move_base_publisher/cmake/move_base_publisherConfig-version.cmake
