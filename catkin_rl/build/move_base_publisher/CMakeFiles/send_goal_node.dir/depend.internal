@@ -122,6 +122,9 @@ CMakeFiles/send_goal_node.dir/src/send_goal.cpp.o
  /opt/ros/noetic/include/actionlib_msgs/GoalID.h
  /opt/ros/noetic/include/actionlib_msgs/GoalStatus.h
  /opt/ros/noetic/include/actionlib_msgs/GoalStatusArray.h
+ /opt/ros/noetic/include/gazebo_msgs/SpawnModel.h
+ /opt/ros/noetic/include/gazebo_msgs/SpawnModelRequest.h
+ /opt/ros/noetic/include/gazebo_msgs/SpawnModelResponse.h
  /opt/ros/noetic/include/geometry_msgs/Point.h
  /opt/ros/noetic/include/geometry_msgs/Pose.h
  /opt/ros/noetic/include/geometry_msgs/PoseStamped.h

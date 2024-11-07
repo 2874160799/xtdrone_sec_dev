@@ -3,9 +3,15 @@
 #include <visualization_msgs/Marker.h>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
+#include <gazebo_msgs/SpawnModel.h>
 #include <send_goal.h>
+#include <fstream>
+#include <streambuf>
 
 
+/*
+    发布目标点
+*/
 
 void send_goal(double x,double y,double orientation_w)
 {
@@ -42,7 +48,9 @@ void send_goal(double x,double y,double orientation_w)
         ROS_INFO("failed to reached the goal");
     }
 }
-
+/*
+    rviz中显示目标点
+*/
 void publish_goal_marker(ros::Publisher& marker_pub,const geometry_msgs::PoseStamped& goal_pose)
 {
     //创建marker消息
@@ -69,3 +77,63 @@ void publish_goal_marker(ros::Publisher& marker_pub,const geometry_msgs::PoseSta
     marker_pub.publish(marker);
 }
 
+/*
+    定义放置模型的函数
+*/
+bool spwanModelInGazebo(ros::NodeHandle &nh,const std::string &model_name,const std::string &model_file,const geometry_msgs::Pose &pose)
+{
+    //创建服务客户端，连接到gazebo的spwan_model服务
+    ros::ServiceClient spwan_model_client = nh.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model");
+
+    std::ifstream t(model_file);
+    std::string model_xml((std::istreambuf_iterator<char>(t)),std::istreambuf_iterator<char>());
+
+    //创建spwan_model 服务请求
+    gazebo_msgs::SpawnModel srv;
+    srv.request.model_name = model_name;
+    srv.request.model_xml = model_xml;
+    srv.request.initial_pose = pose;
+    srv.request.reference_frame = "world";
+
+    //调用服务
+    if (spwan_model_client.call(srv))
+    {
+        ROS_INFO("Successfully spwaned model %s",model_name.c_str());
+        return true;
+    }
+    else
+    {
+        ROS_ERROR("Failed to spwan model %s",model_name.c_str());
+        return false;
+    }
+}
+
+/*
+    放置模型的线程函数
+*/
+void spwanModelThread(ros::NodeHandle &nh)
+{
+    //设置模型文件的名称，路径和位置
+    std::string model_name = "arrow_red_1";
+    std::string model_file = "/home/ubuntu/.gazebo/models/arrow_red/model.sdf";
+    geometry_msgs::Pose pose;
+    pose.position.x = 6.5;
+    pose.position.y = 5.5;
+    pose.position.z = 5.0;
+    //pose.orientation.w = 1.0;
+    //设置四元数，绕y轴旋转90度
+    pose.orientation.x = -sin(M_PI/4);
+    pose.orientation.y = 0.0;
+    pose.orientation.z = 0.0;
+    pose.orientation.w = cos(M_PI/4);
+
+    //调用spwanmodelingazebo函数来放置模型
+    if (spwanModelInGazebo(nh,model_name,model_file,pose))
+    {
+        ROS_INFO("Model spwan sucessfully!");
+    }
+    else
+    {
+        ROS_ERROR("Failed to spwan model!");
+    }
+}

@@ -17,7 +17,10 @@ int main(int argc, char** argv)
     goal_pose.pose.position.x = x;    
     goal_pose.pose.position.y = y;   
     goal_pose.pose.orientation.w = 1.0;//朝向为默认
+
     std::thread goal_thread(send_goal,x,y,1.0);
+    std::thread spwan_thread(spwanModelThread,std::ref(nh));
+
 
     ros::Rate loop_rate(10);
 
@@ -28,5 +31,6 @@ int main(int argc, char** argv)
         loop_rate.sleep();
     }
     goal_thread.join();
+    spwan_thread.join();
     return 0;
 }
