@@ -14,14 +14,10 @@ move_base_msgs/MoveBaseAction.h
 actionlib/client/simple_action_client.h
 -
 
-/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/send_goal.cpp
+/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/main.cpp
 ros/ros.h
 -
-geometry_msgs/PoseStamped.h
--
-move_base_msgs/MoveBaseAction.h
--
-actionlib/client/simple_action_client.h
+visualization_msgs/Marker.h
 -
 send_goal.h
 -
@@ -311,6 +307,22 @@ geometry_msgs/Pose.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/Quaternion.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
+/opt/ros/noetic/include/geometry_msgs/Vector3.h
 string
 -
 vector
@@ -1144,6 +1156,22 @@ ros/forwards.h
 
 /opt/ros/noetic/include/rosconsole/macros_generated.h
 
+/opt/ros/noetic/include/std_msgs/ColorRGBA.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /opt/ros/noetic/include/std_msgs/Header.h
 string
 -
@@ -1158,6 +1186,34 @@ ros/serialization.h
 ros/builtin_message_traits.h
 -
 ros/message_operations.h
+-
+
+/opt/ros/noetic/include/visualization_msgs/Marker.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+geometry_msgs/Pose.h
+-
+geometry_msgs/Vector3.h
+-
+std_msgs/ColorRGBA.h
+-
+geometry_msgs/Point.h
+-
+std_msgs/ColorRGBA.h
 -
 
 /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h

@@ -1,0 +1,8 @@
+<launch>
+    <!-- 设置参数 goal_x, goal_y-->
+    <param name="goal_x" value="6.5"/>
+    <param name="goal_y" value="5.5"/>
+
+    <!-- 启动 send_goal_node -->
+    <node name="send_goal_node" pkg="move_base_publisher" type="send_goal_node"/>
+</launch>
