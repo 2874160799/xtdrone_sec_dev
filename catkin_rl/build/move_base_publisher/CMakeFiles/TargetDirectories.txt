@@ -2,6 +2,7 @@
 /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/install.dir
 /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/list_install_components.dir
 /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/edit_cache.dir
+/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/train_node.dir
 /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir
 /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/move_base_msgs_generate_messages_lisp.dir
 /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles/move_base_msgs_generate_messages_eus.dir

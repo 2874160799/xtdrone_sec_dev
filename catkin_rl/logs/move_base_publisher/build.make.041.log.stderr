@@ -1,0 +1,9 @@
+/usr/bin/ld: CMakeFiles/train_node.dir/src/drone_env.cpp.o: in function `is_within_radius(double, double, double)':
+drone_env.cpp:(.text+0x3e): undefined reference to `drone_x'
+/usr/bin/ld: drone_env.cpp:(.text+0x5a): undefined reference to `drone_y'
+/usr/bin/ld: CMakeFiles/train_node.dir/src/train.cpp.o: in function `main':
+train.cpp:(.text+0x27b): undefined reference to `odomCallback(boost::shared_ptr<nav_msgs::Odometry_<std::allocator<void> > const> const&)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/train_node.dir/build.make:117：/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/lib/move_base_publisher/train_node] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:178：CMakeFiles/train_node.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2

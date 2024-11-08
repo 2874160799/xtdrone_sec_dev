@@ -1,0 +1,6 @@
+[35m[1mScanning dependencies of target train_node[0m
+[ 50%] Built target send_goal_node
+[ 83%] [32mBuilding CXX object CMakeFiles/train_node.dir/src/train.cpp.o[0m
+[ 83%] [32mBuilding CXX object CMakeFiles/train_node.dir/src/drone_env.cpp.o[0m
+[100%] [32m[1mLinking CXX executable /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/lib/move_base_publisher/train_node[0m
+[100%] Built target train_node

@@ -1,4 +1,0 @@
-[35m[1mScanning dependencies of target send_goal_node[0m
-[ 33%] [32mBuilding CXX object CMakeFiles/send_goal_node.dir/src/send_goal.cpp.o[0m
-[ 66%] [32m[1mLinking CXX executable /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/lib/move_base_publisher/send_goal_node[0m
-[100%] Built target send_goal_node

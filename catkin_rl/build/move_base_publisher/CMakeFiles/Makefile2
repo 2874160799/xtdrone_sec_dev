@@ -53,6 +53,7 @@ CMAKE_BINARY_DIR = /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_pu
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/train_node.dir/all
 all: CMakeFiles/send_goal_node.dir/all
 all: gtest/all
 
@@ -64,6 +65,7 @@ preinstall: gtest/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/train_node.dir/clean
 clean: CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/clean
 clean: CMakeFiles/move_base_msgs_generate_messages_lisp.dir/clean
 clean: CMakeFiles/move_base_msgs_generate_messages_eus.dir/clean
@@ -166,6 +168,33 @@ gtest/googletest/clean: gtest/googletest/CMakeFiles/gtest_main.dir/clean
 gtest/googletest/clean: gtest/googletest/CMakeFiles/gtest.dir/clean
 
 .PHONY : gtest/googletest/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/train_node.dir
+
+# All Build rule for target.
+CMakeFiles/train_node.dir/all:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/depend
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles --progress-num=12,13,14,15 "Built target train_node"
+.PHONY : CMakeFiles/train_node.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/train_node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/train_node.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/build/move_base_publisher/CMakeFiles 0
+.PHONY : CMakeFiles/train_node.dir/rule
+
+# Convenience name for target.
+train_node: CMakeFiles/train_node.dir/rule
+
+.PHONY : train_node
+
+# clean rule for target.
+CMakeFiles/train_node.dir/clean:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/clean
+.PHONY : CMakeFiles/train_node.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/move_base_msgs_generate_messages_nodejs.dir

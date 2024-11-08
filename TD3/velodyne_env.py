@@ -23,7 +23,7 @@ TIME_DELTA = 0.1
 
 
 # Check if the random goal position is located on an obstacle and do not accept it if it is
-def check_pos(x, y):
+def check_pos(x, y):#判断目标是否在合适的范围内
     goal_ok = True
 
     if -3.8 > x > -6.2 and 6.2 > y > 3.8:

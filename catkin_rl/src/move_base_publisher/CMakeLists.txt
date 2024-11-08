@@ -209,3 +209,6 @@ include_directories(
 
 add_executable(send_goal_node src/send_goal.cpp src/main.cpp) 
 target_link_libraries(send_goal_node ${catkin_LIBRARIES})
+
+add_executable(train_node src/drone_env.cpp src/callback.cpp src/train.cpp)
+target_link_libraries(train_node ${catkin_LIBRARIES})

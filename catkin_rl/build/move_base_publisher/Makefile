@@ -168,6 +168,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named train_node
+
+# Build rule for target.
+train_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 train_node
+.PHONY : train_node
+
+# fast build rule for target.
+train_node/fast:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/build
+.PHONY : train_node/fast
+
+#=============================================================================
 # Target rules for targets named move_base_msgs_generate_messages_nodejs
 
 # Build rule for target.
@@ -765,6 +778,60 @@ gtest/fast:
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
+src/callback.o: src/callback.cpp.o
+
+.PHONY : src/callback.o
+
+# target to build an object file
+src/callback.cpp.o:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/callback.cpp.o
+.PHONY : src/callback.cpp.o
+
+src/callback.i: src/callback.cpp.i
+
+.PHONY : src/callback.i
+
+# target to preprocess a source file
+src/callback.cpp.i:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/callback.cpp.i
+.PHONY : src/callback.cpp.i
+
+src/callback.s: src/callback.cpp.s
+
+.PHONY : src/callback.s
+
+# target to generate assembly for a file
+src/callback.cpp.s:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/callback.cpp.s
+.PHONY : src/callback.cpp.s
+
+src/drone_env.o: src/drone_env.cpp.o
+
+.PHONY : src/drone_env.o
+
+# target to build an object file
+src/drone_env.cpp.o:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/drone_env.cpp.o
+.PHONY : src/drone_env.cpp.o
+
+src/drone_env.i: src/drone_env.cpp.i
+
+.PHONY : src/drone_env.i
+
+# target to preprocess a source file
+src/drone_env.cpp.i:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/drone_env.cpp.i
+.PHONY : src/drone_env.cpp.i
+
+src/drone_env.s: src/drone_env.cpp.s
+
+.PHONY : src/drone_env.s
+
+# target to generate assembly for a file
+src/drone_env.cpp.s:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/drone_env.cpp.s
+.PHONY : src/drone_env.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -819,6 +886,33 @@ src/send_goal.cpp.s:
 	$(MAKE) -f CMakeFiles/send_goal_node.dir/build.make CMakeFiles/send_goal_node.dir/src/send_goal.cpp.s
 .PHONY : src/send_goal.cpp.s
 
+src/train.o: src/train.cpp.o
+
+.PHONY : src/train.o
+
+# target to build an object file
+src/train.cpp.o:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/train.cpp.o
+.PHONY : src/train.cpp.o
+
+src/train.i: src/train.cpp.i
+
+.PHONY : src/train.i
+
+# target to preprocess a source file
+src/train.cpp.i:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/train.cpp.i
+.PHONY : src/train.cpp.i
+
+src/train.s: src/train.cpp.s
+
+.PHONY : src/train.s
+
+# target to generate assembly for a file
+src/train.cpp.s:
+	$(MAKE) -f CMakeFiles/train_node.dir/build.make CMakeFiles/train_node.dir/src/train.cpp.s
+.PHONY : src/train.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -829,6 +923,7 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
+	@echo "... train_node"
 	@echo "... move_base_msgs_generate_messages_nodejs"
 	@echo "... move_base_msgs_generate_messages_lisp"
 	@echo "... move_base_msgs_generate_messages_eus"
@@ -878,12 +973,21 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
+	@echo "... src/callback.o"
+	@echo "... src/callback.i"
+	@echo "... src/callback.s"
+	@echo "... src/drone_env.o"
+	@echo "... src/drone_env.i"
+	@echo "... src/drone_env.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/send_goal.o"
 	@echo "... src/send_goal.i"
 	@echo "... src/send_goal.s"
+	@echo "... src/train.o"
+	@echo "... src/train.i"
+	@echo "... src/train.s"
 .PHONY : help
 
 
