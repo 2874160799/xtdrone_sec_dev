@@ -1,0 +1,10 @@
+[35m[1mScanning dependencies of target train_node[0m
+[ 42%] Built target send_goal_node
+[ 57%] [32mBuilding CXX object CMakeFiles/train_node.dir/src/drone_env.cpp.o[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/train_node.dir/src/train.cpp.o[0m
+[01m[K/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/drone_env.cpp:[m[K In function ‘[01m[Kbool deletModelInGazebo(ros::NodeHandle&, const string&)[m[K’:
+[01m[K/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/drone_env.cpp:214:1:[m[K [01;35m[Kwarning: [m[Kcontrol reaches end of non-void function [[01;35m[K-Wreturn-type[m[K]
+  214 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[ 85%] [32m[1mLinking CXX executable /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/lib/move_base_publisher/train_node[0m
+[100%] Built target train_node

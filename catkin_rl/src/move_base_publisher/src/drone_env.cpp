@@ -97,7 +97,7 @@ void send_goal(double x,double y)
         {
             ROS_INFO("SUCCESSFULLY reached the goal !");
             ac.cancelGoal();
-            loop_flag = true;
+            //loop_flag = true;
             break;
         }
         if (ac.getState() == actionlib::SimpleClientGoalState::ABORTED)
