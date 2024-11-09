@@ -1,8 +1,0 @@
-[35m[1mScanning dependencies of target train_node[0m
-[35m[1mScanning dependencies of target send_goal_node[0m
-[ 14%] [32mBuilding CXX object CMakeFiles/train_node.dir/src/train.cpp.o[0m
-[ 28%] [32mBuilding CXX object CMakeFiles/send_goal_node.dir/src/send_goal.cpp.o[0m
-[ 42%] [32m[1mLinking CXX executable /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/lib/move_base_publisher/train_node[0m
-[ 71%] Built target train_node
-[ 85%] [32m[1mLinking CXX executable /home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/devel/.private/move_base_publisher/lib/move_base_publisher/send_goal_node[0m
-[100%] Built target send_goal_node

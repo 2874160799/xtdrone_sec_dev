@@ -9,13 +9,14 @@
 #include "drone_env.h"
 #include "callback.h"
 
+
 double drone_x;
 double drone_y;
 extern bool loop_flag;
-
+extern bool delete_flag;
+int loop_times = 1;
 int main(int argc, char** argv) 
 {
-
     ros::init(argc,argv,"train_node");
     ros::NodeHandle nh;
     //publisher
@@ -50,15 +51,19 @@ int main(int argc, char** argv)
                 publish_goal_marker(marker_pub, goal_pose);
             });
 
-        std::thread goal_thread(send_goal,x,y);
-        std::thread spawn_thread(spwanModelThread,std::ref(nh),x,y);//放置模型线程
+        std::thread goal_thread(send_goal, x, y);
         
-        ros::spinOnce();
-        loop_rate.sleep();
+        std::thread spawn_thread(spwanModelThread,std::ref(nh),x,y,loop_times);//放置模型线程
+
+
         goal_thread.join();
         spawn_thread.join();
+        
+        //deletModelInGazebo(nh,"arrow_red_1");
 
-        deletModelInGazebo(nh,"arrow_red_1");
+        ros::spinOnce();
+        loop_rate.sleep();
+        loop_times++;
     }
     return 0;
 }

@@ -6,16 +6,20 @@
 #include <visualization_msgs/Marker.h>
 #include <gazebo_msgs/SpawnModel.h>
 #include <gazebo_msgs/DeleteModel.h>
+#include <gazebo_msgs/GetWorldProperties.h>
+#include <geometry_msgs/Pose.h>
 #include <fstream>
 #include <streambuf>
 #include <nav_msgs/Odometry.h>
 #include <cmath>
 
 
+
 extern double drone_x;
 extern double drone_y;
 
 bool loop_flag = true;//开启新一轮训练的标志
+bool delete_flag = false;
 
 std::string current_model_name = "";
 
@@ -32,29 +36,57 @@ bool is_within_radius(double target_x,double target_y,double radius)
 bool check_goal(double x,double y)//可能存在无法到达的点，需要修改
 {
     bool goal_ok = false;
-    if (-7 > x > -9.5 &&  7.5 > y > -1)
+    // 1
+    if (-7 > x > -9 &&  7 > y > -1)
     goal_ok = true;
-    if (-1.5 > x > -6 &&  7.5 > y > 2)
+    // 2
+    if (-2 > x > -5 &&  7 > y > 2.5)
     goal_ok = true;
-    if (-1.5 > x > -6 &&  0.5 > y > -1)
+    // 3
+    if (-1.5 > x > -5 &&  0.5 > y > -1)
     goal_ok = true;
-    if (-5 > x > -9.5 &&  -2.5 > y > -8)
+    // 10
+    if (-5 > x > -9 &&  -2.5 > y > -7.5)
     goal_ok = true;
-    if (-5 > x > -9.5 &&  -9.5 > y > -11.5)
+    // 11
+    if (-5 > x > -9 &&  -9.5 > y > -11)
     goal_ok = true;
-    if (2.5 > x > 0 &&  7.5 > y > -11.5)
+    // 4
+    if (2 > x > 0.5 &&  7 > y > -11)
     goal_ok = true;
-    if (9.5 > x > 3.5 &&  7.5 > y > 5)
+    // 5 
+    if (9 > x > 4 &&  7 > y > 5)
     goal_ok = true;
-    if (6 > x > 3.5 &&  3 > y > -7)
+    // 6
+    if (5.5 > x > 4 &&  2.5 > y > -6.5)
     goal_ok = true;
-    if (9.5 > x > 7 &&  3 > y > -7)
+    // 7
+    if (9 > x > 7.5 &&  2.5 > y > -6.5)
     goal_ok = true;
-    if (9.5 > x > 3 &&  -8 > y > -11.5)
+    // 8 
+    if (9 > x > 3 &&  -8.5 > y > -11)
     goal_ok = true;
-    if (-1 > x > -2.5 &&  -2.5 > y > -11.5)
+    // 9 
+    if (-1.5 > x > -2.5 &&  -3 > y > -11)
     goal_ok = true;
     return goal_ok;
+}
+
+bool checkModelExists(ros::NodeHandle &nh, const std::string &model_name) 
+{
+    ros::ServiceClient client = nh.serviceClient<gazebo_msgs::GetWorldProperties>("/gazebo/get_world_properties");
+    gazebo_msgs::GetWorldProperties srv;
+    
+    if (client.call(srv)) {
+        for (const auto &name : srv.response.model_names) {
+            if (name == model_name) {
+                return true; // 模型存在
+            }
+        }
+    } else {
+        ROS_ERROR("Failed to call service /gazebo/get_world_properties");
+    }
+    return false; // 模型不存在
 }
 double generate_random_coordinate(double min,double max)
 {
@@ -62,6 +94,24 @@ double generate_random_coordinate(double min,double max)
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(min,max);
     return dis(gen);
+}
+
+
+bool deleteModelInGazebo(ros::NodeHandle &nh, const std::string &model_name) 
+{
+    ros::ServiceClient client = nh.serviceClient<gazebo_msgs::DeleteModel>("/gazebo/delete_model");
+    gazebo_msgs::DeleteModel delete_srv;
+    delete_srv.request.model_name = model_name;
+
+    if (client.call(delete_srv) && delete_srv.response.success) {
+        ROS_INFO("Model [%s] deleted successfully!", model_name.c_str());
+        client.shutdown();
+        return true;
+    } else {
+        ROS_WARN("Failed to delete model [%s]: %s", model_name.c_str(), delete_srv.response.status_message.c_str());
+        client.shutdown();
+        return false;
+    }
 }
 
 void send_goal(double x,double y)
@@ -98,6 +148,7 @@ void send_goal(double x,double y)
             ROS_INFO("SUCCESSFULLY reached the goal !");
             ac.cancelGoal();
             //loop_flag = true;
+            delete_flag = true;
             break;
         }
         if (ac.getState() == actionlib::SimpleClientGoalState::ABORTED)
@@ -162,10 +213,11 @@ bool spwanModelInGazebo(ros::NodeHandle &nh,const std::string &model_name,const 
     }
 }
 
-void spwanModelThread(ros::NodeHandle &nh,double x,double y)
+void spwanModelThread(ros::NodeHandle &nh,double x,double y,int i)
 {
     //设置模型文件的名称，路径和位置
-    std::string model_name = "arrow_red_1";
+    std::string model_name = "arrow_red_" + std::to_string(i);
+    std::string old_model_name = "arrow_red_" + std::to_string(i -1);
     std::string model_file = "/home/ubuntu/.gazebo/models/arrow_red/model.sdf";
     geometry_msgs::Pose pose;
     pose.position.x = x;
@@ -179,68 +231,21 @@ void spwanModelThread(ros::NodeHandle &nh,double x,double y)
     pose.orientation.w = cos(M_PI/4);
 
     //调用spwanmodelingazebo函数来放置模型
-    if (spwanModelInGazebo(nh,model_name,model_file,pose))
-    {
-        ROS_INFO("Model spwan sucessfully!");
-    }
-    else
-    {
-        ROS_ERROR("Failed to spwan model!");
-    }
-}
-
-bool deletModelInGazebo(ros::NodeHandle &nh, const std::string &model_name)
-{
-    ros::ServiceClient client = nh.serviceClient<gazebo_msgs::DeleteModel>("/gazebo/delete_model");
-    gazebo_msgs::DeleteModel delete_srv;
-    delete_srv.request.model_name = model_name;
-
-    if (client.call(delete_srv))
-    {
-        if (delete_srv.response.success)
-        {
-            ROS_INFO("Model [%s] deleted successully!",model_name.c_str());
-            return true;
-        }
-        else 
-        {
-            ROS_WARN("Model [%s] deletion failed: %s",model_name.c_str(),delete_srv.response.status_message.c_str());
+    // 检查上一个模型是否已经存在，存在则删除
+    if (checkModelExists(nh, old_model_name)) {
+        ROS_INFO("Model [%s] already exists, deleting it first.", old_model_name.c_str());
+        if (!deleteModelInGazebo(nh, old_model_name)) {
+            ROS_ERROR("Failed to delete existing model [%s], cannot proceed with spawning.", old_model_name.c_str());
+            return;
         }
     }
-    else
-    {
-        ROS_ERROR("Failed to call delete model service!");
+
+    // 放置新的模型
+    if (spwanModelInGazebo(nh, model_name, model_file, pose)) {
+        ROS_INFO("Model spawned successfully!");
+    } else {
+        ROS_ERROR("Failed to spawn model!");
     }
 }
 
-void updateModelInGazebo(ros::NodeHandle &nh,double x,double y)
-{
-    //如果上一个模型存在
-    if(!current_model_name.empty())
-    {
-        deletModelInGazebo(nh,current_model_name);
-    }
-    //更新模型名字
-    current_model_name = "arrow_red_" + std::to_string(ros::Time::now().toSec());
-    //放置新的模型
-    std::string model_file = "/home/ubuntu/.gazebo/models/arrow_red/model.sdf";
-    geometry_msgs::Pose pose;
-    pose.position.x = x;
-    pose.position.y = y;
-    pose.position.z = 5.0;
-    //pose.orientation.w = 1.0;
-    //设置四元数，绕y轴旋转90度
-    pose.orientation.x = -sin(M_PI/4);
-    pose.orientation.y = 0.0;
-    pose.orientation.z = 0.0;
-    pose.orientation.w = cos(M_PI/4);
 
-    if (spwanModelInGazebo(nh,current_model_name,model_file,pose))
-    {
-        ROS_INFO("Model [%s] spawned successfully at position (%.1f, %.1f)", current_model_name.c_str(), x, y);
-    }
-    else
-    {
-        ROS_ERROR("Failed to spawn model [%s]!", current_model_name.c_str());
-    }
-}
