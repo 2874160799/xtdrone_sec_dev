@@ -1,0 +1,22 @@
+[35m[1mScanning dependencies of target train_node[0m
+[ 42%] Built target send_goal_node
+[ 57%] [32mBuilding CXX object CMakeFiles/train_node.dir/src/train.cpp.o[0m
+In file included from [01m[K/usr/include/boost/function/detail/maybe_include.hpp:22[m[K,
+                 from [01m[K/usr/include/boost/function/detail/function_iterate.hpp:14[m[K,
+                 from [01m[K/usr/include/boost/preprocessor/iteration/detail/iter/forward1.hpp:53[m[K,
+                 from [01m[K/usr/include/boost/function.hpp:71[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/forwards.h:40[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/common.h:37[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/ros.h:43[m[K,
+                 from [01m[K/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/train.cpp:4[m[K:
+/usr/include/boost/function/function_template.hpp: In instantiation of ‘[01m[Kstatic void boost::detail::function::void_function_invoker1<FunctionPtr, R, T0>::invoke(boost::detail::function::function_buffer&, T0) [with FunctionPtr = void (*)(ros::Publisher&, const geometry_msgs::PoseStamped_<std::allocator<void> >&); R = void; T0 = const ros::TimerEvent&][m[K’:
+[01m[K/usr/include/boost/function/function_template.hpp:931:38:[m[K   required from ‘[01m[Kvoid boost::function1<R, T1>::assign_to(Functor) [with Functor = void (*)(ros::Publisher&, const geometry_msgs::PoseStamped_<std::allocator<void> >&); R = void; T0 = const ros::TimerEvent&][m[K’
+[01m[K/usr/include/boost/function/function_template.hpp:720:7:[m[K   required from ‘[01m[Kboost::function1<R, T1>::function1(Functor, typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type) [with Functor = void (*)(ros::Publisher&, const geometry_msgs::PoseStamped_<std::allocator<void> >&); R = void; T0 = const ros::TimerEvent&; typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type = int][m[K’
+[01m[K/usr/include/boost/function/function_template.hpp:1068:16:[m[K   required from ‘[01m[Kboost::function<R(T0)>::function(Functor, typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type) [with Functor = void (*)(ros::Publisher&, const geometry_msgs::PoseStamped_<std::allocator<void> >&); R = void; T0 = const ros::TimerEvent&; typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type = int][m[K’
+[01m[K/home/ubuntu/lyl/xtdrone_sec_dev/catkin_rl/src/move_base_publisher/src/train.cpp:43:77:[m[K   required from here
+[01m[K/usr/include/boost/function/function_template.hpp:117:11:[m[K [01;31m[Kerror: [m[Kinvalid initialization of reference of type ‘[01m[Kros::Publisher&[m[K’ from expression of type ‘[01m[Kconst ros::TimerEvent[m[K’
+  117 |           [01;31m[KBOOST_FUNCTION_RETURN[m[K(f(BOOST_FUNCTION_ARGS));
+      |           [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/train_node.dir/build.make:89：CMakeFiles/train_node.dir/src/train.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:178：CMakeFiles/train_node.dir/all] 错误 2
+make: *** [Makefile:141：all] 错误 2

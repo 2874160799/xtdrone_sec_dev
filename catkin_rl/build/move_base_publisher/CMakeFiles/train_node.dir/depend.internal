@@ -92,6 +92,9 @@ CMakeFiles/train_node.dir/src/drone_env.cpp.o
  /opt/ros/noetic/include/actionlib_msgs/GoalID.h
  /opt/ros/noetic/include/actionlib_msgs/GoalStatus.h
  /opt/ros/noetic/include/actionlib_msgs/GoalStatusArray.h
+ /opt/ros/noetic/include/gazebo_msgs/DeleteModel.h
+ /opt/ros/noetic/include/gazebo_msgs/DeleteModelRequest.h
+ /opt/ros/noetic/include/gazebo_msgs/DeleteModelResponse.h
  /opt/ros/noetic/include/gazebo_msgs/SpawnModel.h
  /opt/ros/noetic/include/gazebo_msgs/SpawnModelRequest.h
  /opt/ros/noetic/include/gazebo_msgs/SpawnModelResponse.h

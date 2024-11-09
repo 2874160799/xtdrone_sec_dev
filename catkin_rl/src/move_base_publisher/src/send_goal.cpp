@@ -74,6 +74,7 @@ void publish_goal_marker(ros::Publisher& marker_pub,const geometry_msgs::PoseSta
     marker.color.b = 1.0f;  // 无蓝色
     marker.color.a = 1.0f;  // 完全不透明
 
+    marker.lifetime = ros::Duration();
     marker_pub.publish(marker);
 }
 

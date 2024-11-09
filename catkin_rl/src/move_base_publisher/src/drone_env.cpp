@@ -5,6 +5,7 @@
 #include <move_base_msgs/MoveBaseAction.h>
 #include <visualization_msgs/Marker.h>
 #include <gazebo_msgs/SpawnModel.h>
+#include <gazebo_msgs/DeleteModel.h>
 #include <fstream>
 #include <streambuf>
 #include <nav_msgs/Odometry.h>
@@ -14,6 +15,12 @@
 extern double drone_x;
 extern double drone_y;
 
+bool loop_flag = true;//开启新一轮训练的标志
+
+std::string current_model_name = "";
+
+
+
 bool is_within_radius(double target_x,double target_y,double radius)
 {
     double distance = std::sqrt(std::pow(drone_x - target_x,2) + std::pow(drone_y - target_y,2)); 
@@ -22,7 +29,7 @@ bool is_within_radius(double target_x,double target_y,double radius)
 }
 
 //检查目标点是否在障碍物上
-bool check_goal(double x,double y)
+bool check_goal(double x,double y)//可能存在无法到达的点，需要修改
 {
     bool goal_ok = false;
     if (-7 > x > -9.5 &&  7.5 > y > -1)
@@ -90,6 +97,7 @@ void send_goal(double x,double y)
         {
             ROS_INFO("SUCCESSFULLY reached the goal !");
             ac.cancelGoal();
+            loop_flag = true;
             break;
         }
         if (ac.getState() == actionlib::SimpleClientGoalState::ABORTED)
@@ -98,15 +106,6 @@ void send_goal(double x,double y)
             break;
         }
     }
-    // //获取执行结果
-    // if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
-    // {
-    //     ROS_INFO("SUCCESSFULLY reached the goal !");
-    // }
-    // else
-    // {
-    //     ROS_INFO("failed to reached the goal");
-    // }
 }
 
 void publish_goal_marker(ros::Publisher& marker_pub,const geometry_msgs::PoseStamped& goal_pose)
@@ -190,5 +189,58 @@ void spwanModelThread(ros::NodeHandle &nh,double x,double y)
     }
 }
 
+bool deletModelInGazebo(ros::NodeHandle &nh, const std::string &model_name)
+{
+    ros::ServiceClient client = nh.serviceClient<gazebo_msgs::DeleteModel>("/gazebo/delete_model");
+    gazebo_msgs::DeleteModel delete_srv;
+    delete_srv.request.model_name = model_name;
 
+    if (client.call(delete_srv))
+    {
+        if (delete_srv.response.success)
+        {
+            ROS_INFO("Model [%s] deleted successully!",model_name.c_str());
+            return true;
+        }
+        else 
+        {
+            ROS_WARN("Model [%s] deletion failed: %s",model_name.c_str(),delete_srv.response.status_message.c_str());
+        }
+    }
+    else
+    {
+        ROS_ERROR("Failed to call delete model service!");
+    }
+}
 
+void updateModelInGazebo(ros::NodeHandle &nh,double x,double y)
+{
+    //如果上一个模型存在
+    if(!current_model_name.empty())
+    {
+        deletModelInGazebo(nh,current_model_name);
+    }
+    //更新模型名字
+    current_model_name = "arrow_red_" + std::to_string(ros::Time::now().toSec());
+    //放置新的模型
+    std::string model_file = "/home/ubuntu/.gazebo/models/arrow_red/model.sdf";
+    geometry_msgs::Pose pose;
+    pose.position.x = x;
+    pose.position.y = y;
+    pose.position.z = 5.0;
+    //pose.orientation.w = 1.0;
+    //设置四元数，绕y轴旋转90度
+    pose.orientation.x = -sin(M_PI/4);
+    pose.orientation.y = 0.0;
+    pose.orientation.z = 0.0;
+    pose.orientation.w = cos(M_PI/4);
+
+    if (spwanModelInGazebo(nh,current_model_name,model_file,pose))
+    {
+        ROS_INFO("Model [%s] spawned successfully at position (%.1f, %.1f)", current_model_name.c_str(), x, y);
+    }
+    else
+    {
+        ROS_ERROR("Failed to spawn model [%s]!", current_model_name.c_str());
+    }
+}
